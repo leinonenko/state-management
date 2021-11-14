@@ -26,12 +26,16 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
+app.get('/form', (req, res) => {
+  res.render('form');
+});
+
 app.post('/login', (req, res)=>{
-  if(req.body.username===username && req.body.password===password){
-    req.session.logged= true;
+  if (req.body.username === username && req.body.password === password) {
+    req.session.logged = true;
     res.redirect('/secret');
-  }else{
-    req.session.logged= false;
+  } else {
+    req.session.logged = false;
     res.redirect('/form');
   }
 });
@@ -55,8 +59,9 @@ app.get('/setCookie/:clr', (req,res)=>{
 
 app.get('/getCookie', (req, res) => {
   console.log('cookies', req.cookies);
-  res.send('color is ${req.cookies.color}');
+  res.send(`color is ${req.cookies.color}`);
 });
+
 app.get('/deleteCookie', (req, res) => {
   res.clearCookie('color');
   console.log('cookies', req.cookies);
